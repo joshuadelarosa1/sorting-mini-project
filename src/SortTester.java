@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import java.math.BigInteger;
+import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -61,8 +62,11 @@ public class SortTester {
     String[] expectedTwo = {"world", "hello"};
 
     sorter.sort(original, (x, y) -> Integer.compare(x.length(), y.length()));
-    assertAll("Checks for all permutations", () -> assertArrayEquals(original, expected),
-        () -> assertArrayEquals(original, expectedTwo));
+    if (Arrays.equals(original, expected) || Arrays.equals(original, expectedTwo)) {
+      assertTrue(true);
+    } else {
+      assertTrue(false);
+    }
   } // sameLenTest
 
   @Test
