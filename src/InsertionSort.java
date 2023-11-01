@@ -39,10 +39,6 @@ public class InsertionSort implements Sorter {
     }
 
     for (int i = 1; i < values.length; i++) {
-      if (i + 1 > values.length) {
-        break;
-      }
-
       if (order.compare(values[i], values[i - 1]) < 0) {
         temp = values[i];
 
@@ -65,21 +61,5 @@ public class InsertionSort implements Sorter {
       }
     }
   } // sort(T[], Comparator<? super T>
-
-  public static void main(String[] args) {
-
-    InsertionSort sorter = new InsertionSort();
-
-    String[] tester = {"hello", "sam", "congratulations"};
-    sorter.sort(tester, (x, y) -> Integer.compare(x.length(), y.length()));
-
-    Integer[] original = {1, 5, 2, 3, 8, 8, 4};
-    sorter.sort(original, (x, y) -> Integer.compare(x, y));
-
-    for (String temp : tester) {
-      System.out.println(temp);
-    }
-
-  }
 
 } // class InsertionSort
