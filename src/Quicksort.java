@@ -30,44 +30,34 @@ public class Quicksort implements Sorter {
   // | Methods |
   // +---------+
 
-  static <T> void partition(T[] arr, int lb, int ub, Comparator<? super T> order) {
-    T temp;
+  static <T> int partition(T[] arr, int lb, int ub, Comparator<? super T> order) {
+    int small = lb + 1;
+    int large = ub;
     int pivotIndex = lb + ((ub - lb) / 2);
-    int small = lb;
-    int large = ub - 1;
 
-    temp = arr[large];
-    arr[large] = arr[pivotIndex];
+    T temp = arr[lb];
+    arr[lb] = arr[pivotIndex];
     arr[pivotIndex] = temp;
 
-    while (small != large) {
-      if(large < 0) {
-        break;
-      }
-
-      if (order.compare(arr[small], arr[ub]) >= 0 && order.compare(arr[large], arr[ub]) <= 0) {
+    while (small < large) {
+      if (order.compare(arr[small], arr[lb]) <= 0) {
+        small++;
+      } else if (order.compare(arr[large], arr[lb]) > 0) {
+        large--;
+      } else {
         temp = arr[small];
         arr[small] = arr[large];
         arr[large] = temp;
-
-        small++;
-        large--;
-      } else if (order.compare(arr[small], arr[ub]) >= 0
-          && order.compare(arr[large], arr[ub]) >= 0) {
-        large--;
-      } else if (order.compare(arr[small], arr[ub]) <= 0
-          && order.compare(arr[large], arr[ub]) <= 0) {
-        small++;
-      } else if (order.compare(arr[small], arr[ub]) <= 0
-          && order.compare(arr[large], arr[ub]) >= 0) {
         small++;
         large--;
       }
-
     }
-    temp = arr[large];
-    arr[large] = arr[ub];
-    arr[ub] = temp;
+
+    temp = arr[lb];
+    arr[lb] = arr[small - 1];
+    arr[small - 1] = temp;
+
+    return small - 1;
   } // partition
 
   @Override
@@ -76,6 +66,6 @@ public class Quicksort implements Sorter {
       return;
     }
 
-    partition(values, 0, values.length - 1, order);
+    partition(values, 0, values.length, order);
   } // sort(T[], Comparator<? super T>
 } // class Quicksort
