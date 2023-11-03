@@ -1,15 +1,15 @@
 /**
  * Tests of our FakeSorter.
  */
-public class FakeSortTester extends SortTester {
+public class DelarosaJoshuaSortTester extends SortTester {
 
   // +--------------+------------------------------------------------
   // | Constructors |
   // +--------------+
 
-  public FakeSortTester() {
+  public DelarosaJoshuaSortTester() {
     super();
-    this.sorter = FakeSort.SORTER;
+    this.sorter = DelarosaJoshuaSort.SORTER;
   } // FakeSortTester()
 
 } // class FakeSortTester
