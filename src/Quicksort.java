@@ -31,10 +31,6 @@ public class Quicksort implements Sorter {
   // +---------+
 
   static <T> int partition(T[] arr, int lb, int ub, Comparator<? super T> order) {
-    if (arr.length <= 1) {
-      return 0;
-    }
-
     int small = lb + 1;
     int large = ub;
     int pivotIndex = lb + ((ub - lb) / 2);
@@ -63,8 +59,23 @@ public class Quicksort implements Sorter {
     return small - 1;
   } // partition
 
+  public <T> void quickSort(T[] values, int lb, int ub, Comparator<? super T> order) {
+    int pivot = partition(values, lb, ub, order);
+
+    if (pivot - lb > 1) {
+      quickSort(values, lb, pivot, order);
+    }
+    if (ub - pivot > 1) {
+      quickSort(values, pivot + 1, ub, order);
+    }
+  }
+
   @Override
   public <T> void sort(T[] values, Comparator<? super T> order) {
-    partition(values, 0, values.length, order);
+    if (values.length <= 1) {
+      return;
+    }
+
+    quickSort(values, 0, values.length, order);
   } // sort(T[], Comparator<? super T>
 } // class Quicksort

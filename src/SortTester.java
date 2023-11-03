@@ -26,7 +26,6 @@ public class SortTester {
   // | Tests |
   // +-------+
 
-  // I will fix this stuff later, maybe try comparing by length instead
 
   @Test
   public void zeroItemTest() {
